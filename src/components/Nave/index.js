@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState, useRef, useCallback } from "react";
 import NaveLimitMove from "../NaveLimitMove";
 import * as S from './style';
 
@@ -15,8 +15,8 @@ export default function Nave (){
     const [ verticalMove, setVerticalMove ] = useState(0);
     const [ horizontalMove, setHorizontalMove ] = useState(250);
 
-    useEffect( () => {
-        
+    const naveMovimentation = useCallback( () => {
+
         document.addEventListener('keyup', (event) => {
 
             const onClickKey = {
@@ -46,18 +46,34 @@ export default function Nave (){
             onClickKey[event.key]();
 
         });
-
     },[velocity]);
+
+
+    const naveAttack = useCallback( () => {
+
+        document.addEventListener('keypress', (event) => {
+            if(event.key === 'p'){
+                alert('Atacou');
+            }
+        })
+
+    },[]);
+
+    useEffect( () => {
+        naveMovimentation();
+        naveAttack();
+    },[naveMovimentation,naveAttack]);
     
     return(
         <NaveLimitMove>
             
-            <S.NaveStyleImage
+            <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} onVerticalMove={verticalMove} src={nave}>
 
-                ref={naveRef}
-                onHorizontalMove={horizontalMove} 
-                onVerticalMove={verticalMove} 
-                src={nave}/>
+                <S.NaveHalf halfPosition={40}/>
+                <S.NaveHalf halfPosition={102}/>
+                <S.NaveStyleImage src={nave}/>
+
+            </S.NaveAndHelfsContainer>
                 
         </NaveLimitMove>
     )
