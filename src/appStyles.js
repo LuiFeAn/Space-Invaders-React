@@ -13,7 +13,6 @@ export const ScoreContainer = styled.div`
         color:white;
         margin: 50px;
         font-weight: bold;
-        font-family: 'VT323', monospace;
     }
 
 `;

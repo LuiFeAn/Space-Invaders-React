@@ -11,11 +11,13 @@ export default createGlobalStyle`
         background:url(https://wallpaperaccess.com/full/2513478.jpg);
         background-attachment: fixed;
         background-size: contain;
+        user-select: none;
     }
 
     *{
         padding: 0px;
         margin:0px;
+        font-family: 'VT323', monospace;
     }
 
 `;

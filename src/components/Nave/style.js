@@ -25,6 +25,18 @@ export const NaveHalf = styled.div`
 
 `;
 
+export const NaveBullet = styled.div`
+
+
+    width: 10px;
+    height: 10px;
+    background: green;
+    position: absolute;
+    border-radius: 100%;
+
+
+`;
+
 export const NaveStyleImage = styled.img`
 
     width: 150px;
