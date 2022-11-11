@@ -1,24 +1,53 @@
 import Nave from "./components/Nave";
-import { ScoreContainer } from "./appStyles";
+import { ScoreContainer, Container } from "./appStyles";
 import GlobalStyles from "./assets/styles/globalStyles";
-import { useState } from "react";
+import { useEffect, useState, useMemo } from "react";
 import Modal from './components/Modal';
+
+import soundIcon from './assets/images/sound.jpg';
+import menuGameSound from './assets/sound/menu-game.mp3'
 
 export default function App(){
 
   const [ gameStart, setGameStart ] = useState(false);
+  const [ audioPlay, setAudioPlay ] = useState(false);
+
   const [ score, setScore ] = useState(0);
 
-  return (
-    <div>
-      <ScoreContainer>
-         { !gameStart &&  <Modal title={'SPACE INVADERS'} onGameStart={gameStart} changeGameStart={setGameStart}/>}
-          <span>
-            {`SCORE: ${score}`}
-          </span>
-        </ScoreContainer>
-        <GlobalStyles/>
-        <Nave onGameStart={gameStart}/>
-    </div>
+  const playAudio = useMemo( () => new Audio(menuGameSound),[]);
+
+  const handlePlayAudio = () => {
+
+    playAudio.loop();
+
+    if(!audioPlay){
+        setAudioPlay(true);
+        playAudio.play();
+    }else{
+      setAudioPlay(false);
+      playAudio.pause();
+    }
+
+  }
+
+  useEffect( () => {
+      document.addEventListener('keypress', (event) => {
+          console.log(event);
+          if(event.key === 'Enter'){
+            setGameStart(false);
+          }
+      })
+  },[]);
+
+  return(
+    <Container>
+        { !gameStart && <Modal title={'SPACE INVADERS'} titleTwo={`ReactJs Edition`} onGameStart={gameStart} changeGameStart={setGameStart}/>}
+        <ScoreContainer>
+            <img onClick={handlePlayAudio} src={soundIcon}/>
+            <span>{`SCORE: ${score}`}</span>
+          </ScoreContainer>
+          <GlobalStyles/>
+          <Nave onGameStart={gameStart}/>
+    </Container>
   )
 }

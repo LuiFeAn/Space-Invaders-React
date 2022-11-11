@@ -21,4 +21,9 @@ export const ModalContainer = styled.div`
         font-size:55px;
     }
 
+    span{
+        color:white;
+        margin-left:120px;
+    }
+
 `;
