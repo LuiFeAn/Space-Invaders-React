@@ -3,14 +3,14 @@ import * as S from './style';
 
 export default function NaveLimitMove({children}){
 
-  const [ containerLimitHorizontal, setContainerLimitHorizontal ] = useState();
-  const [ containerLimitVertical, setContainerLimitVertical ] = useState();
-
   const naveContainerRef = useRef(null);
 
+  const [ containerLimitHorizontal, setContainerLimitHorizontal ] = useState(0);
+  const [ containerLimitVertical, setContainerLimitVertical ] = useState(0);
 
   useEffect( () => {
-
+    setContainerLimitHorizontal(naveContainerRef.current.offsetWidth);
+    setContainerLimitVertical(naveContainerRef.current.offsetHeight);
   },[]);
 
     return(

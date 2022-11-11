@@ -7,7 +7,6 @@ export const NaveContainer = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    background:yellow;
     position: absolute;
     bottom: 0px;
 

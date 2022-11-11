@@ -9,15 +9,15 @@ export default function Nave (){
     const naveRef = useRef(null);
 
     const [ hp, setHp ] = useState(200);
-    const [ velocity, setVelocity ] = useState(30);
+    const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
 
     const [ verticalMove, setVerticalMove ] = useState(0);
-    const [ horizontalMove, setHorizontalMove ] = useState(0);
+    const [ horizontalMove, setHorizontalMove ] = useState(250);
 
     useEffect( () => {
         
-        document.addEventListener('keypress', (event) => {
+        document.addEventListener('keyup', (event) => {
 
             const onClickKey = {
 
