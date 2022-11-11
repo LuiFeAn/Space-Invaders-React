@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const ScoreContainer = styled.div`
 
     width: 100%;
-    height: 50px;
+    height: 150px;
     display: flex;
+    user-select: none;
     justify-content: flex-end;
 
     span{
