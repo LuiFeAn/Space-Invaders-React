@@ -1,9 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import NaveLimitMove from "../NaveLimitMove";
 import * as S from './style';
 
 import nave from '../../assets/images/nave.gif'
 
 export default function Nave (){
+
+    const naveRef = useRef(null);
 
     const [ hp, setHp ] = useState(200);
     const [ velocity, setVelocity ] = useState(30);
@@ -13,21 +16,30 @@ export default function Nave (){
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
     useEffect( () => {
+        
         document.addEventListener('keypress', (event) => {
 
             const onClickKey = {
 
                 'w': () => {
-                    setVerticalMove( PrevValue => PrevValue + velocity );
+                    setVerticalMove( 
+                        PrevValue => PrevValue + velocity 
+                    );
                 },
                 'a': () => {
-                    setHorizontalMove( PrevValue => PrevValue + velocity);
+                    setHorizontalMove( 
+                        PrevValue => PrevValue + velocity 
+                    );
                 },
                 's': () => {
-                    setVerticalMove( PrevValue => PrevValue + -velocity);
+                    setVerticalMove( 
+                        PrevValue => PrevValue + - velocity 
+                    );
                 },
                 'd': () => {
-                    setHorizontalMove( PrevValue => PrevValue + - velocity);
+                    setHorizontalMove( 
+                        PrevValue => PrevValue + - velocity 
+                    );
                 }
             }
 
@@ -35,12 +47,19 @@ export default function Nave (){
 
         });
 
-    },[]);
+    },[velocity]);
     
     return(
-        <S.NaveContainer>
-            <S.NaveStyleImage onHorizontalMove={horizontalMove} onVerticalMove={verticalMove} src={nave}/>
-        </S.NaveContainer>
+        <NaveLimitMove>
+            
+            <S.NaveStyleImage
+
+                ref={naveRef}
+                onHorizontalMove={horizontalMove} 
+                onVerticalMove={verticalMove} 
+                src={nave}/>
+                
+        </NaveLimitMove>
     )
 
 }
