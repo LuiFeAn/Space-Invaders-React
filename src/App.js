@@ -1,7 +1,11 @@
-
+import Nave from "./components/Nave";
+import GlobalStyles from "./assets/styles/globalStyles";
 
 export default function App(){
   return (
-    <h1>Olá, mundo</h1>
+    <>
+      <GlobalStyles/>
+      <Nave/>
+    </>
   )
 }
