@@ -11,6 +11,7 @@ const titleAnimation = keyframes`
         font-size:20px;
     }
 
+
 `;
 
 const titleTwoAnimation = keyframes`
@@ -66,7 +67,7 @@ export const ModalContainer = styled.div`
         font-size:55px;
         position: absolute;
         top:220px;
-        animation: ${titleAnimation} 1.7s;
+        animation: ${titleAnimation} 2.5s;
     }
 
     span{
