@@ -23,7 +23,7 @@ export const NaveAndHelfsContainer = styled.div`
     position:relative;
     transition: 1s;
     right: ${({ onHorizontalMove }) => `${onHorizontalMove}px`};
-    bottom:50px;
+    bottom:90px;
 
 
 `;
@@ -33,7 +33,7 @@ export const MobileInputsContainer = styled.div`
 
     .left-mobile-container, .right-mobile-container,.mobile-attack{
         position: absolute;
-        bottom: 10px;
+        bottom: 20px;
     }
 
     .left-mobile-container{
@@ -72,13 +72,13 @@ export const NaveStyleImage = styled.img`
 
     width: 150px;
     height:150px;
-    
+
 `;
 
 export const MobileInputButton = styled.button`
 
-    width:100px;
-    height:100px;
+    width:80px;
+    height:80px;
     border-radius:100%;
     display: none;
     opacity: 60%;
