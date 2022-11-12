@@ -7,7 +7,7 @@ export const Container = styled.div`
         display: none;
     }
 
-`;
+`
 
 export const ScoreContainer = styled.div`
 

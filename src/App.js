@@ -40,13 +40,26 @@ export default function App(){
 
   return(
     <Container>
-        { !gameStart && <Modal title={'SPACE INVADERS'} titleTwo={`ReactJs Edition`} onGameStart={gameStart} changeGameStart={setGameStart}/>}
+
+      <GlobalStyles/>
+
+      { !gameStart && (
+        <Modal 
+          title={'SPACE INVADERS'} 
+          titleTwo={`ReactJs Edition`} 
+          onGameStart={gameStart} 
+          changeGameStart={setGameStart}/>
+      )}
+
         <ScoreContainer>
-            <img onClick={handlePlayAudio} src={ audioPlay ? soundOffIcon : soundIcon}/>
-            <span>{`SCORE: ${score}`}</span>
-          </ScoreContainer>
-          <GlobalStyles/>
-          <Nave onGameStart={gameStart}/>
+
+          <img onClick={handlePlayAudio} src={ audioPlay ? soundOffIcon : soundIcon}/>
+          <span>{`SCORE: ${score}`}</span>
+
+        </ScoreContainer>
+
+        <Nave onGameStart={gameStart}/>
+
     </Container>
   )
 }

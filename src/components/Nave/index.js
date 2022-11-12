@@ -92,6 +92,18 @@ export default function Nave ({onGameStart}){
                 <S.NaveStyleImage src={nave}/>
 
             </S.NaveAndHelfsContainer>
+
+            <S.MobileInputsContainer>
+
+                <div className="left-mobile-container">
+                    <S.MobileInputButton>{"<"}</S.MobileInputButton>
+                </div>
+
+                <div className="right-mobile-container">
+                    <S.MobileInputButton>{">"}</S.MobileInputButton>
+                </div>
+                
+            </S.MobileInputsContainer>
                 
         </NaveLimitMove>
     )

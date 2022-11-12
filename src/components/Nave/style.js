@@ -14,6 +14,24 @@ export const NaveAndHelfsContainer = styled.div`
 
 `;
 
+
+export const MobileInputsContainer = styled.div`
+
+    .left-mobile-container, .right-mobile-container{
+        position: absolute;
+        bottom: 10px;
+    }
+
+    .left-mobile-container{
+       left:10px;
+    }
+
+    .right-mobile-container{
+        right: 10px;
+    }
+
+`;
+
 export const NaveHalf = styled.div`
 
     position: absolute;
@@ -50,4 +68,21 @@ export const NaveStyleImage = styled.img`
     width: 150px;
     height:150px;
     
+`;
+
+export const MobileInputButton = styled.button`
+
+    width:100px;
+    height:100px;
+    border-radius:100%;
+    display: none;
+    opacity: 60%;
+    background:black;
+    color:white;
+    font-size:45px;
+
+    @media(max-width:780px){
+        display: block;
+    }
+
 `;
