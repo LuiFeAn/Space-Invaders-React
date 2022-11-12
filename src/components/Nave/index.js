@@ -1,5 +1,4 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
-import NaveLimitMove from "../NaveLimitMove";
 import * as S from './style';
 
 import nave from '../../assets/images/nave.gif'
@@ -107,7 +106,7 @@ export default function Nave ({onGameStart}){
    }
     
     return(
-        <NaveLimitMove>
+        <S.NaveContainer>
 
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 
@@ -129,7 +128,7 @@ export default function Nave ({onGameStart}){
                 
             </S.MobileInputsContainer>
                 
-        </NaveLimitMove>
+        </S.NaveContainer>
     )
 
 }
