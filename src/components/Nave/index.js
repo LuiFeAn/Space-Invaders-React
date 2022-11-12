@@ -2,8 +2,7 @@ import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import * as S from './style';
 
 import nave from '../../assets/images/nave.gif';
-import shot from '../../assets/images/shot.png';
-
+import shotSprite from '../../assets/images/shot.png';
 import naveShot from '../../assets/sound/nave-shot.wav';
 
 export default function Nave ({onGameStart}){
@@ -15,33 +14,20 @@ export default function Nave ({onGameStart}){
     const [ hp, setHp ] = useState(200);
     const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
+    const [ bulletVelocity, setBulletVelocity ] = useState(50);
 
-    const [ bulletVelocity, setBulletVelocity ] = useState(30);
-    
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
     const shotSound = useMemo ( () => new Audio(naveShot),[]);
 
-    const naveLeftMoviment = useCallback( () => {
-        setHorizontalMove( 
-            PrevValue => PrevValue +  velocity 
-        );
-    },[])
-
-    const naveRightMoviment = useCallback( () => {
-        setHorizontalMove( 
-            PrevValue => PrevValue + - velocity 
-        );
-    },[])
-
-   useEffect( () => {
+    useEffect( () => {
 
         if(onGameStart && window.screen.width > 760 && window.screen.height > 760){
 
             document.addEventListener('keypress', (event) => {
 
                 const onClickKey = {
-        
+
                     'a': () => {
                         naveLeftMoviment();
                     },
@@ -52,41 +38,13 @@ export default function Nave ({onGameStart}){
                     default: () => null
 
                 }
-        
+
                try{ onClickKey[event.key](); }catch{ onClickKey.default();}
-        
+
             });
         }
    },[onGameStart,velocity]);
 
-
-   function createBullet(){
-
-        shotSound.play();
-        
-        const rightBullet = document.createElement('img');
-        const leftBullet = document.createElement('img');
-
-        rightBullet.setAttribute('src',shot);
-        leftBullet.setAttribute('src',shot);
-
-        rightBullet.classList.add('nave-bullet');
-        leftBullet.classList.add('nave-bullet');
-        rightHelf.current.appendChild(rightBullet);
-
-        leftHelf.current.appendChild(leftBullet);
-
-        let bulletRightPoisition = rightBullet.style.bottom;
-        let bulletLeftPosition = rightBullet.style.bottom;
-
-        setInterval(() => {
-
-            rightBullet.style.bottom += 100+"px";
-            leftBullet.style.bottom += 100+"px";
-
-        },10);
-
-   }
 
    useEffect( () => {
 
@@ -97,18 +55,65 @@ export default function Nave ({onGameStart}){
             }
         });
     }
-    
+
    },[onGameStart]);
 
    useEffect( () => {
     const naveDirections = naveRef.current.getBoundingClientRect();
         if(naveDirections){
-            const { left, right } = naveDirections;  
-            if(right > window.screen.width - 40  || left <= 40){
+            const { left, right } = naveDirections;
+            if(right > window.screen.width - 30  || left <= 50){
                 setHorizontalMove(0);
             }
         }
    },[horizontalMove])
+
+    const createBullet = async () => {
+
+        await shotSound.play();
+        const rightBullet = document.createElement('img');
+        const leftBullet = document.createElement('img');
+
+        rightBullet.setAttribute('src',shotSprite);
+        leftBullet.setAttribute('src',shotSprite);
+
+        rightBullet.classList.add('nave-bullet');
+        leftBullet.classList.add('nave-bullet');
+
+        rightHelf.current.appendChild(rightBullet);
+        leftHelf.current.appendChild(leftBullet);
+
+        bulletDirection([leftBullet,rightBullet],{
+            bulletVelocity:0
+        });
+
+    }
+
+    const naveLeftMoviment = () => {
+        setHorizontalMove(
+            PrevValue => PrevValue +  velocity
+        );
+    };
+
+    const naveRightMoviment =  () => {
+        setHorizontalMove(
+            PrevValue => PrevValue + - velocity
+        );
+    };
+
+    const bulletDirection = (bullets) => {
+
+        const [ leftBullet, rightBullet ] = bullets;
+
+        let currentBulletsPosition = 0;
+
+        setInterval(() => {
+            currentBulletsPosition += bulletVelocity;
+            leftBullet.style.bottom = `${currentBulletsPosition}px`;
+            rightBullet.style.bottom = `${currentBulletsPosition}px`;
+        },100);
+
+    }
 
 
    function handleNaveMobileMoviment(direction){
@@ -126,7 +131,7 @@ export default function Nave ({onGameStart}){
         makeDirection[direction]();
 
    }
-    
+
     return(
         <S.NaveContainer>
 
@@ -151,9 +156,9 @@ export default function Nave ({onGameStart}){
                 <div className="right-mobile-container">
                     <S.MobileInputButton onClick={ () => handleNaveMobileMoviment('right')}>{">"}</S.MobileInputButton>
                 </div>
-                
+
             </S.MobileInputsContainer>
-                
+
         </S.NaveContainer>
     )
 
