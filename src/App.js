@@ -18,8 +18,6 @@ export default function App(){
 
   const handlePlayAudio = () => {
 
-    playAudio.loop();
-
     if(!audioPlay){
         setAudioPlay(true);
         playAudio.play();

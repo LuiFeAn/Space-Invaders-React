@@ -14,11 +14,10 @@ export default function Nave ({onGameStart}){
     const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
 
-    const [ bulletVelocity, setBulletVelocity ] = useState(100);
-    const [ bullets, setBullets ] = useState([]);
-
+    const [ bulletVelocity, setBulletVelocity ] = useState(30);
+    
     const [ verticalMove, setVerticalMove ] = useState(0);
-    const [ horizontalMove, setHorizontalMove ] = useState(250);
+    const [ horizontalMove, setHorizontalMove ] = useState(20);
 
    useEffect( () => {
 
@@ -56,12 +55,31 @@ export default function Nave ({onGameStart}){
         }
    },[onGameStart,velocity]);
 
+
+   function createBullet(){
+        
+        const rightBullet = document.createElement('div');
+        const leftBullet = document.createElement('div');
+        rightBullet.classList.add('nave-bullet');
+        leftBullet.classList.add('nave-bullet');
+        rightHelf.current.appendChild(rightBullet);
+        leftHelf.current.appendChild(leftBullet);
+
+   }
+
+
+   function addBulletMoviment(){
+    setInterval(() => {
+        console.log('passou');
+    },2000)
+   }
+
    useEffect( () => {
 
     if(onGameStart){
         document.addEventListener('keypress', (event) => {
             if(event.key === 'p'){
-                setBullets( PrevValue => [...PrevValue,true,true]);
+                createBullet();
             }
         });
     }
@@ -71,7 +89,6 @@ export default function Nave ({onGameStart}){
     return(
         <NaveLimitMove>
 
-            {bullets.length > 0 && bullets.map( bullet => (<S.NaveBullet onBulletVelocity={bulletVelocity}/>))}
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} onVerticalMove={verticalMove} src={nave}>
 
                 <S.NaveHalf ref={leftHelf} halfPosition={40}/>
