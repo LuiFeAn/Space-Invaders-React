@@ -27,7 +27,7 @@ export const NaveContainer = styled.div`
 export const NaveAndHelfsContainer = styled.div`
 
 
-    width: 100px;
+    width: 150px;
     height: 150px;
     user-select: none;
     display: flex;
@@ -66,16 +66,6 @@ export const MobileInputsContainer = styled.div`
             height: 80px;
         }
     }
-
-`;
-
-export const NaveHalf = styled.div`
-
-    position: absolute;
-    left:${({halfPosition}) => `${halfPosition}px`};
-    width:10px;
-    height:10px;
-    top:50px;
 
 `;
 

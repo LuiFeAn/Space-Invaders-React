@@ -8,15 +8,13 @@ import naveShot from '../../assets/sound/nave-shot.wav';
 export default function Nave ({onGameStart}){
 
     const naveRef = useRef(null);
-    const leftHelf = useRef(null);
-    const rightHelf = useRef(null);
 
     const naveContainerRef = useRef(null);
 
     const [ hp, setHp ] = useState(200);
     const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
-    const [ bulletVelocity, setBulletVelocity ] = useState(50);
+    const [ bulletVelocity, setBulletVelocity ] = useState(10);
 
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
@@ -26,7 +24,7 @@ export default function Nave ({onGameStart}){
 
         if(onGameStart && window.screen.width > 760 && window.screen.height > 760){
 
-            document.addEventListener('keypress', (event) => {
+            document.addEventListener('keyup', (event) => {
 
                 const onClickKey = {
 
@@ -64,7 +62,7 @@ export default function Nave ({onGameStart}){
     const naveDirections = naveRef.current.getBoundingClientRect();
         if(naveDirections){
             const { left, right } = naveDirections;
-            if(right > window.screen.width - 30  || left <= 50){
+            if(right >= window.screen.width - 40 || left <= 0){
                 setHorizontalMove(0);
             }
         }
@@ -88,8 +86,8 @@ export default function Nave ({onGameStart}){
 
         const navPositions = naveRef.current.getBoundingClientRect();
 
-        rightBullet.style.left = navPositions.right + - 42 + "px";
-        leftBullet.style.left = navPositions.left + -5 + "px";
+        rightBullet.style.left = ( navPositions.right + - 42 ) + "px";
+        leftBullet.style.left = ( navPositions.left + -5)  + "px";
 
 
         bulletDirection([leftBullet,rightBullet]);
@@ -111,15 +109,15 @@ export default function Nave ({onGameStart}){
     const bulletDirection = (bullets) => {
 
         const [ leftBullet, rightBullet ] = bullets;
-
         let currentBulletsPosition = 0;
 
-        const bulletMoviment = setInterval(() => {
+        const bulletMoviment = setInterval( () => {
+
             currentBulletsPosition += bulletVelocity;
             leftBullet.style.bottom = `${currentBulletsPosition}px`;
             rightBullet.style.bottom = `${currentBulletsPosition}px`;
 
-            if(currentBulletsPosition > 7500){
+            if(currentBulletsPosition > 5500){
                 currentBulletsPosition = 0;
                 clearInterval(bulletMoviment);
                 leftBullet.remove();
@@ -152,8 +150,6 @@ export default function Nave ({onGameStart}){
 
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 
-                <S.NaveHalf ref={leftHelf} halfPosition={-6}/>
-                <S.NaveHalf ref={rightHelf} halfPosition={55}/>
                 <S.NaveStyleImage src={nave}/>
 
             </S.NaveAndHelfsContainer>
