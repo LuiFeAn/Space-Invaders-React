@@ -30,24 +30,16 @@ export default function App(){
 
   }
 
-  useEffect( () => {
-      document.addEventListener('keypress', (event) => {
-          if(event.key === 'Enter'){
-            setGameStart(false);
-          }
-      })
-  },[]);
-
   return(
     <Container>
 
       <GlobalStyles/>
 
       { !gameStart && (
-        <Modal 
-          title={'SPACE INVADERS'} 
-          titleTwo={`ReactJs Edition`} 
-          onGameStart={gameStart} 
+        <Modal
+          title={'SPACE INVADERS'}
+          titleTwo={`ReactJs Edition`}
+          onGameStart={gameStart}
           changeGameStart={setGameStart}/>
       )}
 
