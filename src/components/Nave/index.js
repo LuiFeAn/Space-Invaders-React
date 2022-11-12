@@ -11,6 +11,8 @@ export default function Nave ({onGameStart}){
     const leftHelf = useRef(null);
     const rightHelf = useRef(null);
 
+    const naveContainerRef = useRef(null);
+
     const [ hp, setHp ] = useState(200);
     const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
@@ -71,8 +73,12 @@ export default function Nave ({onGameStart}){
     const createBullet = async () => {
 
         await shotSound.play();
+
         const rightBullet = document.createElement('img');
         const leftBullet = document.createElement('img');
+
+        naveContainerRef.current.appendChild(rightBullet);
+        naveContainerRef.current.appendChild(leftBullet);
 
         rightBullet.setAttribute('src',shotSprite);
         leftBullet.setAttribute('src',shotSprite);
@@ -80,8 +86,10 @@ export default function Nave ({onGameStart}){
         rightBullet.classList.add('nave-bullet');
         leftBullet.classList.add('nave-bullet');
 
-        rightHelf.current.appendChild(rightBullet);
-        leftHelf.current.appendChild(leftBullet);
+        const navPositions = naveRef.current.getBoundingClientRect();
+
+        rightBullet.style.left = navPositions.right + - 42 + "px";
+        leftBullet.style.left = navPositions.left + -5 + "px";
 
 
         bulletDirection([leftBullet,rightBullet]);
@@ -106,11 +114,19 @@ export default function Nave ({onGameStart}){
 
         let currentBulletsPosition = 0;
 
-        setInterval(() => {
+        const bulletMoviment = setInterval(() => {
             currentBulletsPosition += bulletVelocity;
             leftBullet.style.bottom = `${currentBulletsPosition}px`;
             rightBullet.style.bottom = `${currentBulletsPosition}px`;
-        },100);
+
+            if(currentBulletsPosition > 7500){
+                currentBulletsPosition = 0;
+                clearInterval(bulletMoviment);
+                leftBullet.remove();
+                rightBullet.remove();
+            }
+
+        },1);
 
     }
 
@@ -132,7 +148,7 @@ export default function Nave ({onGameStart}){
    }
 
     return(
-        <S.NaveContainer>
+        <S.NaveContainer ref={naveContainerRef}>
 
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 

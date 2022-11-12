@@ -10,6 +10,18 @@ export const NaveContainer = styled.div`
     position: absolute;
     bottom: 0px;
 
+    .nave-bullet{
+
+        width: 50px;
+        height: 10px;
+        transition:1s;
+        position: absolute;
+        border-radius: 100%;
+        transform: rotate(-90deg);
+        bottom:200px;
+
+    }
+
 `;
 
 export const NaveAndHelfsContainer = styled.div`
