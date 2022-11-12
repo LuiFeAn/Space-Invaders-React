@@ -65,7 +65,6 @@ export const ModalContainer = styled.div`
         color:white;
         text-align: center;
         font-size:55px;
-        position: absolute;
         top:220px;
         animation: ${titleAnimation} 2.5s;
     }
