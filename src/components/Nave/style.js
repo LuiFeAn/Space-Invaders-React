@@ -3,13 +3,15 @@ import styled from "styled-components";
 export const NaveAndHelfsContainer = styled.div`
 
 
-    width: 150px;
+    width: 100px;
     height: 150px;
     user-select: none;
+    display: flex;
+    justify-content: center;
     position:relative;
     transition: 1s;
     right: ${({ onHorizontalMove }) => `${onHorizontalMove}px`};
-    bottom:100px;
+    bottom:50px;
 
 
 `;

@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef, useCallback } from "react";
+import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import NaveLimitMove from "../NaveLimitMove";
 import * as S from './style';
 
@@ -18,34 +18,38 @@ export default function Nave ({onGameStart}){
     
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
+    const naveLeftMoviment = useCallback( () => {
+        setHorizontalMove( 
+            PrevValue => PrevValue +  velocity 
+        );
+    },[])
+
+    const naveRightMoviment = useCallback( () => {
+        setHorizontalMove( 
+            PrevValue => PrevValue + - velocity 
+        );
+    },[])
+
    useEffect( () => {
 
-        if(onGameStart){
+        if(onGameStart && window.screen.width > 760 && window.screen.height > 760){
 
             document.addEventListener('keyup', (event) => {
 
                 const onClickKey = {
         
                     'a': () => {
-                        setHorizontalMove( 
-                            PrevValue => PrevValue + velocity 
-                        );
+                        naveLeftMoviment();
                     },
 
                     'd': () => {
-                        setHorizontalMove( 
-                            PrevValue => PrevValue + - velocity 
-                        );
+                        naveRightMoviment();
                     },
                     default: () => null
 
                 }
         
-               try{
-                 onClickKey[event.key]();
-               }catch{
-                onClickKey.default();
-               }
+               try{ onClickKey[event.key](); }catch{ onClickKey.default();}
         
             });
         }
@@ -63,13 +67,6 @@ export default function Nave ({onGameStart}){
 
    }
 
-
-   function addBulletMoviment(){
-    setInterval(() => {
-        console.log('passou');
-    },2000)
-   }
-
    useEffect( () => {
 
     if(onGameStart){
@@ -82,20 +79,26 @@ export default function Nave ({onGameStart}){
     
    },[onGameStart]);
 
+   useEffect( () => {
+    const naveDirections = naveRef.current.getBoundingClientRect();
+        if(naveDirections){
+            const { left, right } = naveDirections;  
+            if(right > window.screen.width - 40  || left <= 40){
+                setHorizontalMove(0);
+            }
+        }
+   },[horizontalMove])
+
 
    function handleNaveMobileMoviment(direction){
 
         const makeDirection = {
 
             'right':() => {
-                setHorizontalMove( 
-                    PrevValue => PrevValue + - velocity 
-                );
+                naveRightMoviment();
             },
             'left': () => {
-                setHorizontalMove( 
-                    PrevValue => PrevValue + velocity 
-                );
+                naveLeftMoviment();
             }
         }
 
@@ -108,8 +111,8 @@ export default function Nave ({onGameStart}){
 
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 
-                <S.NaveHalf ref={leftHelf} halfPosition={40}/>
-                <S.NaveHalf ref={rightHelf} halfPosition={102}/>
+                <S.NaveHalf ref={leftHelf} halfPosition={15}/>
+                <S.NaveHalf ref={rightHelf} halfPosition={78}/>
                 <S.NaveStyleImage src={nave}/>
 
             </S.NaveAndHelfsContainer>
