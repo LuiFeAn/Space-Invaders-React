@@ -31,7 +31,7 @@ export const NaveAndHelfsContainer = styled.div`
 
 export const MobileInputsContainer = styled.div`
 
-    .left-mobile-container, .right-mobile-container{
+    .left-mobile-container, .right-mobile-container,.mobile-attack{
         position: absolute;
         bottom: 10px;
     }
@@ -42,6 +42,17 @@ export const MobileInputsContainer = styled.div`
 
     .right-mobile-container{
         right: 10px;
+    }
+
+    .mobile-attack{
+
+        bottom:150px;
+        right:50px;
+
+        button{
+            width: 80px;
+            height: 80px;
+        }
     }
 
 `;

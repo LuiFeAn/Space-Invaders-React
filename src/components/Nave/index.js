@@ -144,6 +144,10 @@ export default function Nave ({onGameStart}){
                     <S.MobileInputButton onClick={ () => handleNaveMobileMoviment('left')}>{"<"}</S.MobileInputButton>
                 </div>
 
+                <div className="mobile-attack">
+                    <S.MobileInputButton onClick={createBullet}>A</S.MobileInputButton>
+                </div>
+
                 <div className="right-mobile-container">
                     <S.MobileInputButton onClick={ () => handleNaveMobileMoviment('right')}>{">"}</S.MobileInputButton>
                 </div>
