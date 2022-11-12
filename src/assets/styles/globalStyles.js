@@ -28,7 +28,7 @@ export default createGlobalStyle`
         bottom:15px;
         border-radius: 100%;
         transform: rotate(-90deg);
-       
+
     }
 
 `;

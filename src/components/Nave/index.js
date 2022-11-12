@@ -83,9 +83,8 @@ export default function Nave ({onGameStart}){
         rightHelf.current.appendChild(rightBullet);
         leftHelf.current.appendChild(leftBullet);
 
-        bulletDirection([leftBullet,rightBullet],{
-            bulletVelocity:0
-        });
+
+        bulletDirection([leftBullet,rightBullet]);
 
     }
 
