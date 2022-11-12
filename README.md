@@ -24,7 +24,7 @@ Tecnologias utilizadas durante o projeto:
 
 ## 💻 Projeto
 
-Este projeto consiste em ser um remake do jogo "Space Invaders" em ReactJs e atualmente ainda está em desenvolvimento =D 
+Este projeto ainda erstá em desenvolvimento e consiste em ser um remake do jogo "Space Invaders"
 
 ## 🤖 Inicialização
 
