@@ -17,7 +17,7 @@ export default function Nave ({onGameStart}){
     const [ bulletVelocity, setBulletVelocity ] = useState(30);
     
     const [ verticalMove, setVerticalMove ] = useState(0);
-    const [ horizontalMove, setHorizontalMove ] = useState(20);
+    const [ horizontalMove, setHorizontalMove ] = useState(0);
 
    useEffect( () => {
 
@@ -46,10 +46,16 @@ export default function Nave ({onGameStart}){
                         setHorizontalMove( 
                             PrevValue => PrevValue + - velocity 
                         );
-                    }
+                    },
+                    default: () => null
+
                 }
         
-                onClickKey[event.key]();
+               try{
+                 onClickKey[event.key]();
+               }catch{
+                onClickKey.default();
+               }
         
             });
         }

@@ -19,14 +19,17 @@ export const ScoreContainer = styled.div`
     align-items: center;
 
     img{
-        width:40px;
-        height:40px;
+
+        width:30px;
+        height:30px;
         cursor: pointer;
         position: absolute;
         z-index:9;
         margin-left: 30px;
         border-radius:100%;
+        right: 20px;
         transition:1s;
+        image-rendering: pixelated;
 
         &:hover{
             transform:scale(1.0cm);
@@ -34,10 +37,10 @@ export const ScoreContainer = styled.div`
     }
 
     span{
+        
         font-size:30px;
         color:white;
-        margin: 50px;
-        margin-left:90px;
+        margin: 30px;
         font-weight: bold;
     }
 

@@ -5,6 +5,8 @@ import { useEffect, useState, useMemo } from "react";
 import Modal from './components/Modal';
 
 import soundIcon from './assets/images/sound.jpg';
+import soundOffIcon from './assets/images/sound-off.png';
+
 import menuGameSound from './assets/sound/menu-game.mp3'
 
 export default function App(){
@@ -30,7 +32,6 @@ export default function App(){
 
   useEffect( () => {
       document.addEventListener('keypress', (event) => {
-          console.log(event);
           if(event.key === 'Enter'){
             setGameStart(false);
           }
@@ -41,7 +42,7 @@ export default function App(){
     <Container>
         { !gameStart && <Modal title={'SPACE INVADERS'} titleTwo={`ReactJs Edition`} onGameStart={gameStart} changeGameStart={setGameStart}/>}
         <ScoreContainer>
-            <img onClick={handlePlayAudio} src={soundIcon}/>
+            <img onClick={handlePlayAudio} src={ audioPlay ? soundOffIcon : soundIcon}/>
             <span>{`SCORE: ${score}`}</span>
           </ScoreContainer>
           <GlobalStyles/>
