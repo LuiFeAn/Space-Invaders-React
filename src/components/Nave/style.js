@@ -9,7 +9,7 @@ export const NaveAndHelfsContainer = styled.div`
     position:relative;
     transition: 1s;
     right: ${({ onHorizontalMove }) => `${onHorizontalMove}px`};
-    bottom:10px;
+    bottom:100px;
 
 
 `;

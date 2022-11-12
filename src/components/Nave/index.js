@@ -80,7 +80,28 @@ export default function Nave ({onGameStart}){
         });
     }
     
-   },[onGameStart])
+   },[onGameStart]);
+
+
+   function handleNaveMobileMoviment(direction){
+
+        const makeDirection = {
+
+            'right':() => {
+                setHorizontalMove( 
+                    PrevValue => PrevValue + - velocity 
+                );
+            },
+            'left': () => {
+                setHorizontalMove( 
+                    PrevValue => PrevValue + velocity 
+                );
+            }
+        }
+
+        makeDirection[direction]();
+
+   }
     
     return(
         <NaveLimitMove>
@@ -96,11 +117,11 @@ export default function Nave ({onGameStart}){
             <S.MobileInputsContainer>
 
                 <div className="left-mobile-container">
-                    <S.MobileInputButton>{"<"}</S.MobileInputButton>
+                    <S.MobileInputButton onClick={ () => handleNaveMobileMoviment('left')}>{"<"}</S.MobileInputButton>
                 </div>
 
                 <div className="right-mobile-container">
-                    <S.MobileInputButton>{">"}</S.MobileInputButton>
+                    <S.MobileInputButton onClick={ () => handleNaveMobileMoviment('right')}>{">"}</S.MobileInputButton>
                 </div>
                 
             </S.MobileInputsContainer>
