@@ -24,7 +24,7 @@ Tecnologias utilizadas durante o projeto:
 
 ## 💻 Projeto
 
-Este projeto ainda erstá em desenvolvimento e consiste em ser um remake do jogo "Space Invaders"
+Este projeto ainda está em desenvolvimento e consiste em ser um remake do jogo "Space Invaders"
 
 ## 🤖 Inicialização
 
