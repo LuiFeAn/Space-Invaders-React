@@ -1,7 +1,10 @@
 import { useEffect, useState, useRef, useCallback, useMemo } from "react";
 import * as S from './style';
 
-import nave from '../../assets/images/nave.gif'
+import nave from '../../assets/images/nave.gif';
+import shot from '../../assets/images/shot.png';
+
+import naveShot from '../../assets/sound/nave-shot.wav';
 
 export default function Nave ({onGameStart}){
 
@@ -16,6 +19,8 @@ export default function Nave ({onGameStart}){
     const [ bulletVelocity, setBulletVelocity ] = useState(30);
     
     const [ horizontalMove, setHorizontalMove ] = useState(0);
+
+    const shotSound = useMemo ( () => new Audio(naveShot),[]);
 
     const naveLeftMoviment = useCallback( () => {
         setHorizontalMove( 
@@ -33,7 +38,7 @@ export default function Nave ({onGameStart}){
 
         if(onGameStart && window.screen.width > 760 && window.screen.height > 760){
 
-            document.addEventListener('keyup', (event) => {
+            document.addEventListener('keypress', (event) => {
 
                 const onClickKey = {
         
@@ -56,13 +61,30 @@ export default function Nave ({onGameStart}){
 
 
    function createBullet(){
+
+        shotSound.play();
         
-        const rightBullet = document.createElement('div');
-        const leftBullet = document.createElement('div');
+        const rightBullet = document.createElement('img');
+        const leftBullet = document.createElement('img');
+
+        rightBullet.setAttribute('src',shot);
+        leftBullet.setAttribute('src',shot);
+
         rightBullet.classList.add('nave-bullet');
         leftBullet.classList.add('nave-bullet');
         rightHelf.current.appendChild(rightBullet);
+
         leftHelf.current.appendChild(leftBullet);
+
+        let bulletRightPoisition = rightBullet.style.bottom;
+        let bulletLeftPosition = rightBullet.style.bottom;
+
+        setInterval(() => {
+
+            rightBullet.style.bottom += 100+"px";
+            leftBullet.style.bottom += 100+"px";
+
+        },10);
 
    }
 
@@ -110,8 +132,8 @@ export default function Nave ({onGameStart}){
 
             <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 
-                <S.NaveHalf ref={leftHelf} halfPosition={15}/>
-                <S.NaveHalf ref={rightHelf} halfPosition={78}/>
+                <S.NaveHalf ref={leftHelf} halfPosition={-6}/>
+                <S.NaveHalf ref={rightHelf} halfPosition={55}/>
                 <S.NaveStyleImage src={nave}/>
 
             </S.NaveAndHelfsContainer>

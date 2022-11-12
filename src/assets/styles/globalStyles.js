@@ -19,4 +19,16 @@ export default createGlobalStyle`
         font-family: 'VT323', monospace;
     }
 
+    .nave-bullet{
+
+        width: 50px;
+        height: 10px;
+        transition:1s;
+        position: absolute;
+        bottom:15px;
+        border-radius: 100%;
+        transform: rotate(-90deg);
+       
+    }
+
 `;
