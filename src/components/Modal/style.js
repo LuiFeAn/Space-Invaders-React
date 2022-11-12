@@ -1,4 +1,49 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const titleAnimation = keyframes`
+
+    0%{
+       color: red;
+       font-size:10px;
+    }
+
+    5%{
+        font-size:20px;
+    }
+
+`;
+
+const titleTwoAnimation = keyframes`
+
+    0%{
+        opacity: 100%;
+    }
+
+    5%{
+        opacity: 90%;
+    }
+
+    10%{
+        opacity: 80%;
+    }
+
+    15%{
+        opacity: 70%;
+    }
+
+    20%{
+        opacity: 60%;
+    }
+
+    25%{
+        opacity: 50%;
+    }
+
+    30%{
+        opacity: 40%;
+    }
+
+`;
 
 
 export const ModalContainer = styled.div`
@@ -19,11 +64,17 @@ export const ModalContainer = styled.div`
         color:white;
         text-align: center;
         font-size:55px;
+        position: absolute;
+        top:220px;
+        animation: ${titleAnimation} 1.7s;
     }
 
     span{
         color:white;
-        margin-left:120px;
+        font-size:25px;
+        margin-left:150px;
+        animation: ${titleTwoAnimation} 1.7s infinite;
     }
+
 
 `;
