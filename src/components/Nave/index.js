@@ -35,6 +35,9 @@ export default function Nave ({onGameStart}){
                     'd': () => {
                         naveRightMoviment();
                     },
+                    'p': () => {
+                        createBullet();
+                    },
                     default: () => null
 
                 }
@@ -43,20 +46,8 @@ export default function Nave ({onGameStart}){
 
             });
         }
-   },[onGameStart,velocity]);
-
-
-   useEffect( () => {
-
-    if(onGameStart){
-        document.addEventListener('keypress', (event) => {
-            if(event.key === 'p'){
-                createBullet();
-            }
-        });
-    }
-
    },[onGameStart]);
+
 
    useEffect( () => {
     const naveDirections = naveRef.current.getBoundingClientRect();
