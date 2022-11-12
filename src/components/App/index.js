@@ -1,13 +1,13 @@
-import Nave from "./components/Nave";
-import { ScoreContainer, Container } from "./appStyles";
-import GlobalStyles from "./assets/styles/globalStyles";
+import Nave from "../Nave";
+import { ScoreContainer, Container } from "./style";
+import GlobalStyles from "../../assets/styles/globalStyles";
 import { useEffect, useState, useMemo } from "react";
-import Modal from './components/Modal';
+import Modal from '../Modal';
 
-import soundIcon from './assets/images/sound.jpg';
-import soundOffIcon from './assets/images/sound-off.png';
+import soundIcon from '../../assets/images/sound.jpg';
+import soundOffIcon from '../../assets/images/sound-off.png';
 
-import menuGameSound from './assets/sound/menu-game.mp3'
+import menuGameSound from '../../assets/sound/menu-game.mp3'
 
 export default function App(){
 
