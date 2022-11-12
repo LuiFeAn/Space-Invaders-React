@@ -16,7 +16,6 @@ export default function Nave ({onGameStart}){
 
     const [ bulletVelocity, setBulletVelocity ] = useState(30);
     
-    const [ verticalMove, setVerticalMove ] = useState(0);
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
    useEffect( () => {
@@ -27,21 +26,12 @@ export default function Nave ({onGameStart}){
 
                 const onClickKey = {
         
-                    'w': () => {
-                        setVerticalMove( 
-                            PrevValue => PrevValue + velocity 
-                        );
-                    },
                     'a': () => {
                         setHorizontalMove( 
                             PrevValue => PrevValue + velocity 
                         );
                     },
-                    's': () => {
-                        setVerticalMove( 
-                            PrevValue => PrevValue + - velocity 
-                        );
-                    },
+
                     'd': () => {
                         setHorizontalMove( 
                             PrevValue => PrevValue + - velocity 
@@ -95,7 +85,7 @@ export default function Nave ({onGameStart}){
     return(
         <NaveLimitMove>
 
-            <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} onVerticalMove={verticalMove} src={nave}>
+            <S.NaveAndHelfsContainer ref={naveRef} onHorizontalMove={horizontalMove} src={nave}>
 
                 <S.NaveHalf ref={leftHelf} halfPosition={40}/>
                 <S.NaveHalf ref={rightHelf} halfPosition={102}/>
