@@ -5,7 +5,7 @@ import nave from '../../assets/images/nave.gif';
 import shotSprite from '../../assets/images/shot.png';
 import naveShot from '../../assets/sound/nave-shot.wav';
 
-export default function Nave ({onGameStart}){
+export default function Nave ({onGameStart,maxBullets,setBullets}){
 
     const naveRef = useRef(null);
 
@@ -14,39 +14,50 @@ export default function Nave ({onGameStart}){
     const [ hp, setHp ] = useState(200);
     const [ velocity, setVelocity ] = useState(50);
     const [ attack, setAttack ] = useState(50);
+
     const [ bulletVelocity, setBulletVelocity ] = useState(10);
 
     const [ horizontalMove, setHorizontalMove ] = useState(0);
 
     const shotSound = useMemo ( () => new Audio(naveShot),[]);
 
-    useEffect( () => {
+
+    const naveInputKeys = useCallback( function (event) {
 
         if(onGameStart && window.screen.width > 760 && window.screen.height > 760){
 
-            document.addEventListener('keyup', (event) => {
+            const onClickKey = {
 
-                const onClickKey = {
+                'a': () => {
+                    naveLeftMoviment();
+                },
 
-                    'a': () => {
-                        naveLeftMoviment();
-                    },
+                'd': () => {
+                    naveRightMoviment();
+                },
+                'p': () => {
+                    console.log(maxBullets);
+                    if(maxBullets > 0){
+                        setBullets( currentBullets => (
+                            currentBullets - parseInt(Math.random() * 20)
+                        ));
+                    }
+                    createBullet();
+                },
+                default: () => null
 
-                    'd': () => {
-                        naveRightMoviment();
-                    },
-                    'p': () => {
-                        createBullet();
-                    },
-                    default: () => null
+            }
 
-                }
+           try{ onClickKey[event.key](); }catch{ onClickKey.default()};
 
-               try{ onClickKey[event.key](); }catch{ onClickKey.default();}
-
-            });
         }
-   },[onGameStart]);
+
+    },[onGameStart,maxBullets]);
+
+    useEffect( () => {
+        document.addEventListener('keyup',naveInputKeys);
+        return ()=> document.removeEventListener('keyup',naveInputKeys);
+    },[naveInputKeys]);
 
 
    useEffect( () => {

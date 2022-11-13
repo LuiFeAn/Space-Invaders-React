@@ -15,7 +15,6 @@ export const ScoreContainer = styled.div`
     height: 150px;
     display: flex;
     user-select: none;
-    justify-content:space-between;
     align-items: center;
 
     img{
@@ -37,10 +36,10 @@ export const ScoreContainer = styled.div`
     }
 
     span{
-        
+
         font-size:30px;
         color:white;
-        margin: 30px;
+        margin: 20px;
         font-weight: bold;
     }
 

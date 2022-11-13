@@ -15,6 +15,7 @@ export default function App(){
   const [ audioPlay, setAudioPlay ] = useState(false);
 
   const [ score, setScore ] = useState(0);
+  const [ bullets, setBullets ] = useState(200);
 
   const playAudio = useMemo( () => new Audio(menuGameSound),[]);
 
@@ -47,10 +48,11 @@ export default function App(){
 
           <img onClick={handlePlayAudio} src={ audioPlay ? soundOffIcon : soundIcon}/>
           <span>{`SCORE: ${score}`}</span>
+          <span>{`BALAS: ${bullets}`}</span>
 
         </ScoreContainer>
 
-        <Nave onGameStart={gameStart}/>
+        <Nave maxBullets={bullets} setBullets={setBullets} onGameStart={gameStart}/>
 
     </Container>
   )
