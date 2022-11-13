@@ -31,6 +31,10 @@ export default function App(){
 
   }
 
+  useEffect( () => {
+    if(bullets <= 0) setBullets(0);
+  } ,[bullets])
+
   return(
     <Container>
 

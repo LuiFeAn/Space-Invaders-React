@@ -36,13 +36,12 @@ export default function Nave ({onGameStart,maxBullets,setBullets}){
                     naveRightMoviment();
                 },
                 'p': () => {
-                    console.log(maxBullets);
                     if(maxBullets > 0){
                         setBullets( currentBullets => (
-                            currentBullets - parseInt(Math.random() * 20)
+                            currentBullets - parseInt(Math.random() * 40)
                         ));
+                        createBullet();
                     }
-                    createBullet();
                 },
                 default: () => null
 
