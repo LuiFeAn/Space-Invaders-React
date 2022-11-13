@@ -17,7 +17,6 @@ export default function Modal({title,titleTwo, onGameStart, changeGameStart}){
 
     useEffect( () => {
         document.addEventListener('keypress',PauseGame);
-        return ()=> document.removeEventListener('keypress',PauseGame);
     },[]);
 
     return ReactPortal.createPortal(
