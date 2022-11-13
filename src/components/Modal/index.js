@@ -3,15 +3,15 @@ import * as S from './style';
 import  ReactPortal  from 'react-dom';
 import Button from '../Button';
 
-export default function Modal({title,titleTwo, onGameStart, changeGameStart}){
+export default function Modal({title,titleTwo, onGameStart, changeGameStart, onPauseGame,setPauseGame}){
 
     const handleGameStart = () => changeGameStart(true);
-
     const quitGame = () => window.close();
 
     const PauseGame = useCallback( function (event){
         if(event.key === 'Enter'){
             changeGameStart(false);
+            setPauseGame(true);
           }
     },[]);
 
@@ -22,9 +22,9 @@ export default function Modal({title,titleTwo, onGameStart, changeGameStart}){
     return ReactPortal.createPortal(
         <S.ModalContainer>
 
-            <p>{title}</p>
-            <span>{titleTwo}</span>
-            <Button onClick={handleGameStart}> Jogar </Button>
+            <p>{ onPauseGame ? 'Jogo Pausado' : title}</p>
+            <span>{ ! onPauseGame && titleTwo }</span>
+            <Button onClick={handleGameStart}>{ onPauseGame ? 'Continuar' : 'Jogar'}</Button>
             <Button onClick={quitGame}>Sair</Button>
 
         </S.ModalContainer>,

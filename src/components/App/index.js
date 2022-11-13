@@ -12,6 +12,7 @@ import menuGameSound from '../../assets/sound/menu-game.mp3'
 export default function App(){
 
   const [ gameStart, setGameStart ] = useState(false);
+  const [ pauseGame, setPauseGame ] = useState(false);
   const [ audioPlay, setAudioPlay ] = useState(false);
 
   const [ score, setScore ] = useState(0);
@@ -40,11 +41,13 @@ export default function App(){
 
       <GlobalStyles/>
 
-      { !gameStart && (
+      { ! gameStart && (
         <Modal
           title={'SPACE INVADERS'}
           titleTwo={`ReactJs Edition`}
           onGameStart={gameStart}
+          onPauseGame={pauseGame}
+          setPauseGame={setPauseGame}
           changeGameStart={setGameStart}/>
       )}
 
