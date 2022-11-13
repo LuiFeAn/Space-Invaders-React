@@ -36,12 +36,7 @@ export default function Nave ({onGameStart,maxBullets,setBullets}){
                     naveRightMoviment();
                 },
                 'p': () => {
-                    if(maxBullets > 0){
-                        setBullets( currentBullets => (
-                            currentBullets - parseInt(Math.random() * 40)
-                        ));
-                        createBullet();
-                    }
+                    createBullet();
                 },
                 default: () => null
 
@@ -71,27 +66,35 @@ export default function Nave ({onGameStart,maxBullets,setBullets}){
 
     const createBullet = async () => {
 
-        await shotSound.play();
+        if(maxBullets > 0){
 
-        const rightBullet = document.createElement('img');
-        const leftBullet = document.createElement('img');
+            setBullets( currentBullets => (
+                currentBullets - parseInt(Math.random() * 40)
+            ));
 
-        naveContainerRef.current.appendChild(rightBullet);
-        naveContainerRef.current.appendChild(leftBullet);
+            await shotSound.play();
 
-        rightBullet.setAttribute('src',shotSprite);
-        leftBullet.setAttribute('src',shotSprite);
+            const rightBullet = document.createElement('img');
+            const leftBullet = document.createElement('img');
 
-        rightBullet.classList.add('nave-bullet');
-        leftBullet.classList.add('nave-bullet');
+            naveContainerRef.current.appendChild(rightBullet);
+            naveContainerRef.current.appendChild(leftBullet);
 
-        const navPositions = naveRef.current.getBoundingClientRect();
+            rightBullet.setAttribute('src',shotSprite);
+            leftBullet.setAttribute('src',shotSprite);
 
-        rightBullet.style.left = ( navPositions.right + - 42 ) + "px";
-        leftBullet.style.left = ( navPositions.left + -5)  + "px";
+            rightBullet.classList.add('nave-bullet');
+            leftBullet.classList.add('nave-bullet');
+
+            const navPositions = naveRef.current.getBoundingClientRect();
+
+            rightBullet.style.left = ( navPositions.right + - 42 ) + "px";
+            leftBullet.style.left = ( navPositions.left + -5)  + "px";
 
 
-        bulletDirection([leftBullet,rightBullet]);
+            bulletDirection([leftBullet,rightBullet]);
+
+        }
 
     }
 
